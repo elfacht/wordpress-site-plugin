@@ -15,3 +15,9 @@ This plugin comes with some basic functions to get things started more fasten.
 
 License: CC-BY-SA https://creativecommons.org/licenses/by-sa/3.0/
 
+### Changelog
+
+## 1.0
+
+initial release
+
