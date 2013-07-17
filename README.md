@@ -1,4 +1,4 @@
-# WP Site Plugins
+# WP Site Plugin
 ## A standard WordPress plugin for custom functions
 
 ### About
