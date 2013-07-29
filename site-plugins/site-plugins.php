@@ -7,7 +7,7 @@ Description: Site specific functions for yoursite.com
 
 
 
-/* SECURITY FUNCTIONS
+/* SECURITY + ADMIN FUNCTIONS
 ========================================================== */
 
 /* =Removes WP version in <header>
@@ -40,6 +40,15 @@ function no_ips($comment_author_ip){
 }
 
 
+/* =Custom login logo
+------------------------------------------------------*/
+function e8_custom_login_logo() {
+	echo '<style type="text/css">
+		h1 a { background-image:url('.get_bloginfo('template_directory').'/images/custom-login-logo.gif) !important; }
+	</style>';
+}
+
+add_action('login_head', 'e8_custom_login_logo');
 
 
 
