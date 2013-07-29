@@ -70,6 +70,15 @@ add_image_size('post-single', 350, 350);
 add_filter('widget_text', 'do_shortcode');
 
 
+/* =Enable excerpts on pages
+------------------------------------------------------*/
+add_action( 'init', 'e8_page_excerpts' );
+
+function e8_page_excerpts() {
+	add_post_type_support( 'page', 'excerpt' );
+}
+
+
 /* =Post views
 ------------------------------------------------------*/
 function wpb_set_post_views($postID) {
