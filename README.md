@@ -17,6 +17,10 @@ License: CC-BY-SA https://creativecommons.org/licenses/by-sa/3.0/
 
 ### Changelog
 
+#### 1.1
+
+added custom login logo and excerpts for pages
+
 #### 1.0
 
 initial release
