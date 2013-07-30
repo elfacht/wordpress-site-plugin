@@ -13,6 +13,8 @@ This plugin comes with some basic functions to get things started more fasten.
 2. Activate the plugin
 3. Add or remove functions in the plugin
 
+See detailed description in this blog post (german): http://www.getoutofmyinternet.com/1947
+
 License: CC-BY-SA https://creativecommons.org/licenses/by-sa/3.0/
 
 ### Changelog
