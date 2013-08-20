@@ -51,11 +51,87 @@ function e8_custom_login_logo() {
 add_action('login_head', 'e8_custom_login_logo');
 
 
+/* =Define widgets
+------------------------------------------------------*/
+function e8_widgets_init() {
+	register_sidebar( array(
+		'name'          => 'Main Widget',
+		'id'            => 'sidebar-1',
+		'description'   => 'Widget description goes hier',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
+	) );
+}
+add_action('widgets_init', 'e8_widgets_init');
+
+
+/* =Adds RSS link in <head>
+------------------------------------------------------*/
+add_theme_support('automatic-feed-links');
+
+
+/* =HTML5 comment and search form
+------------------------------------------------------*/
+add_theme_support('html5', array('search-form', 'comment-form', 'comment-list'));
+
+
+/* =Post formats
+------------------------------------------------------*/
+add_theme_support('post-formats', array(
+	'aside', 'audio', 'chat', 'gallery', 'image', 'link', 'quote', 'status', 'video'
+));
+
+
+/* =Blog title formatting
+------------------------------------------------------*/
+function e8_wp_title($title, $sep) {
+	global $paged, $page;
+
+	if (is_feed())
+		return $title;
+
+	// Add the site name.
+	$title .= get_bloginfo('name');
+
+	// Add the site description for the home/front page.
+	$site_description = get_bloginfo('description', 'display');
+	if ($site_description && (is_home() || is_front_page()))
+		$title = "$title $sep $site_description";
+
+	// Add a page number if necessary.
+	if ($paged >= 2 || $page >= 2)
+		$title = "$title $sep " . sprintf( __( 'Page %s', 'e8' ), max($paged, $page));
+
+	return $title;
+}
+add_filter('wp_title', 'e8_wp_title', 10, 2);
+
+
+/* =Returns URL from post
+------------------------------------------------------*/
+function e8_get_link_url() {
+	$content = get_the_content();
+	$has_url = get_url_in_content( $content );
+
+	return ($has_url) ? $has_url : apply_filters('the_permalink', get_permalink());
+}
+
+
+
+
+
 
 
 
 /* TEMPLATE FUNCTIONS
 ========================================================== */
+
+/* =Thumbnail support
+------------------------------------------------------*/
+add_theme_support('post-thumbnails');
+set_post_thumbnail_size(604, 270, true);
 
 /* =Set image quality
 ------------------------------------------------------*/
@@ -109,6 +185,32 @@ remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 	To count the views of your posts put this code in your content-single.php:
 	<?php wpb_set_post_views(get_the_ID()); ?>
 */
+
+
+/* =Prints HTML with date information for current post.
+------------------------------------------------------*/
+if (!function_exists('e8_entry_date')) :
+
+function e8_entry_date($echo = true) {
+	if (has_post_format(array('chat', 'status')))
+		$format_prefix = _x('%1$s on %2$s', '1: post format name. 2: date', 'twentythirteen');
+	else
+		$format_prefix = '%2$s';
+
+	$date = sprintf('<span class="date"><a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a></span>',
+		esc_url(get_permalink()),
+		esc_attr(sprintf(__('Permalink to %s', 'twentythirteen'), the_title_attribute('echo=0'))),
+		esc_attr(get_the_date( 'c' ) ),
+		esc_html(sprintf($format_prefix, get_post_format_string(get_post_format()), get_the_date()))
+	);
+
+	if ($echo)
+		echo $date;
+
+	return $date;
+}
+
+endif;
 
 
 /* =Global custom fields
