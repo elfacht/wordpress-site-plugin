@@ -2,6 +2,44 @@
 /*
 Plugin Name: Site Plugin for yoursite.com
 Description: Site specific functions for yoursite.com
+
+
+
+Contents:
+
+	SECURITY + ADMIN FUNCTIONS
+	* Removes WP version in <header>
+	* Removes WP version on scripts in <header>
+	* Removes IP address in comments
+	* Custom login logo
+	* Define widgets
+	* Disable plugin deactivation / removes the deactivation link
+	* Adds RSS link in <head>
+	* HTML5 comment and search form
+	* Define Post formats
+	* Blog title formatting
+	* Returns URL from post
+	* Enable post views
+
+	TEMPLATE FUNCTIONS
+	* Thumbnail support
+	* Set image quality
+	* Define header images size
+	* Custom image formats
+	* Allow shortcodes in widgets
+	* Enable excerpts on pages
+	* Prints HTML with date information for current post
+	* Global custom fields
+
+	CUSTOM POST TYPE FUNCTIONS
+	* Adds custom post types to author's page
+	* Adds sticky post option for custom post types
+	* Adds custom post types to RSS
+
+	FOUNDATION SETTINGS
+	* Foundation top bar
+	* Foundation pagination
+
 */
 /* Start Adding Functions Below this Line */
 
@@ -93,7 +131,7 @@ add_theme_support('automatic-feed-links');
 add_theme_support('html5', array('search-form', 'comment-form', 'comment-list'));
 
 
-/* =Post formats
+/* =Define Post formats
 ------------------------------------------------------*/
 add_theme_support('post-formats', array(
 	'aside', 'audio', 'chat', 'gallery', 'image', 'link', 'quote', 'status', 'video'
@@ -134,6 +172,28 @@ function e8_get_link_url() {
 	return ($has_url) ? $has_url : apply_filters('the_permalink', get_permalink());
 }
 
+
+/* =Enable post views
+------------------------------------------------------*/
+function wpb_set_post_views($postID) {
+  $count_key = 'wpb_post_views_count';
+  $count = get_post_meta($postID, $count_key, true);
+  if ($count=='') {
+    $count = 0;
+    delete_post_meta($postID, $count_key);
+    add_post_meta($postID, $count_key, '0');
+  } else {
+    $count++;
+    update_post_meta($postID, $count_key, $count);
+  }
+}
+
+remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+
+/*
+	To count the views of your posts put this code in your content-single.php:
+	<?php wpb_set_post_views(get_the_ID()); ?>
+*/
 
 
 
@@ -178,29 +238,6 @@ add_action( 'init', 'e8_page_excerpts' );
 function e8_page_excerpts() {
 	add_post_type_support( 'page', 'excerpt' );
 }
-
-
-/* =Post views
-------------------------------------------------------*/
-function wpb_set_post_views($postID) {
-  $count_key = 'wpb_post_views_count';
-  $count = get_post_meta($postID, $count_key, true);
-  if ($count=='') {
-    $count = 0;
-    delete_post_meta($postID, $count_key);
-    add_post_meta($postID, $count_key, '0');
-  } else {
-    $count++;
-    update_post_meta($postID, $count_key, $count);
-  }
-}
-
-remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
-
-/*
-	To count the views of your posts put this code in your content-single.php:
-	<?php wpb_set_post_views(get_the_ID()); ?>
-*/
 
 
 /* =Prints HTML with date information for current post.
@@ -256,7 +293,8 @@ function editglobalcustomfields() {
 
     <?php
     	// Add all new input fields to this variable
-    	$option_values = "footer-credits";
+    	$option_values = "";
+    	$option_values .= "footer-credits";
     	$option_values .= ",welcome-message";
     ?>
     <input type="hidden" name="page_options" value="<?php echo $option_values; ?>" />
