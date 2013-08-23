@@ -19,6 +19,10 @@ License: CC-BY-SA https://creativecommons.org/licenses/by-sa/3.0/
 
 ### Changelog
 
+#### 1.2.1
+
+added function to disable plugin deactivation
+
 #### 1.2
 
 added new standard template functions, transferred from twentytwelve
