@@ -15,9 +15,18 @@ This plugin comes with some basic functions to get things started more fasten.
 
 See detailed description in this blog post (german): http://www.getoutofmyinternet.com/1947
 
+### Important!
+
+This plugin includes the standard setup functions of the WP standard themes (e.g. TwentyTwelve).
+To avoid conflicts remove the functions.php in the theme folder.
+
 License: CC-BY-SA https://creativecommons.org/licenses/by-sa/3.0/
 
 ### Changelog
+
+#### 2.0
+
+functions are now modules for better handling and customizing
 
 #### 1.2.2
 
