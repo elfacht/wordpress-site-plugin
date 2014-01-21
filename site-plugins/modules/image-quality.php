@@ -2,6 +2,7 @@
 
 /* =Set image quality
 ------------------------------------------------------*/
-add_filter('jpeg_quality', function($arg) { return 80; });
+add_filter('jpeg_quality', function($arg) { return 70; });
+
 
 ?>

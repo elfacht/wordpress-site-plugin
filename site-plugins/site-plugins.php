@@ -1,13 +1,14 @@
 <?php
 /*
-Plugin Name: Site Plugin for yoursite.com
-Description: Site specific functions for yoursite.com
+Plugin Name: Site Plugin for elfacht.com
+Description: Site specific functions for elfacht.com
 
 
 
 Contents:
 
 	SECURITY + ADMIN FUNCTIONS
+	* Admin header
 	* Removes WP version in <header>
 	* Removes IP address in comments
 	* Custom login logo
@@ -25,6 +26,8 @@ Contents:
 	* Set image quality
 	* Enable header image and define sizes
 	* Custom image sizes
+	* Content navigation
+	* Comments
 	* Enable shortcodes in widgets
 	* Enable excerpts on pages
 	* Prints HTML with date information for current post
@@ -49,19 +52,21 @@ define('PLUGIN_MODULES', WP_PLUGIN_DIR . '/site-plugins/modules/');
 
 
 
-
 /* SECURITY + ADMIN FUNCTIONS
 ========================================================== */
+
+/* =Admin header
+------------------------------------------------------*/
+include(PLUGIN_MODULES . 'admin-header.php');
+
 
 /* =Removes WP version in <header>
 ------------------------------------------------------*/
 include(PLUGIN_MODULES . 'remove-version.php');
 
-
 /* =Removes IP address in comments
 ------------------------------------------------------*/
 include(PLUGIN_MODULES . 'remove-ip-comments.php');
-
 
 /* =Custom login logo
 ------------------------------------------------------*/
@@ -105,7 +110,7 @@ include(PLUGIN_MODULES . 'return-post-url.php');
 
 /* =Enable post views
 ------------------------------------------------------*/
-include(PLUGIN_MODULES . 'post-views.php');
+//include(PLUGIN_MODULES . 'post-views.php');
 
 
 
@@ -132,16 +137,21 @@ include(PLUGIN_MODULES . 'image-quality.php');
 ------------------------------------------------------*/
 include(PLUGIN_MODULES . 'header-image.php');
 
-
 /* =Custom image sizes
 ------------------------------------------------------*/
 include(PLUGIN_MODULES . 'custom-image-sizes.php');
 
+/* =Content navigation
+------------------------------------------------------*/
+include(PLUGIN_MODULES . 'content-nav.php');
+
+/* =Comments
+------------------------------------------------------*/
+include(PLUGIN_MODULES . 'comments.php');
 
 /* =Allow shortcodes in widgets
 ------------------------------------------------------*/
 include(PLUGIN_MODULES . 'enable-widget-shortcodes.php');
-
 
 /* =Enable excerpts on pages
 ------------------------------------------------------*/
@@ -162,19 +172,22 @@ include(PLUGIN_MODULES . 'global-custom-fields.php');
 
 
 
-
-
 /* CUSTOM POST TYPE FUNCTIONS
 ========================================================== */
 
+/* =Custom post types and taxonomies
+------------------------------------------------------*/
+include(PLUGIN_MODULES . 'cpt.php');
+
+
 /* =Adds custom post types to author's page
 ------------------------------------------------------*/
-include(PLUGIN_MODULES . 'cpt-authors-page.php');
+//include(PLUGIN_MODULES . 'cpt-authors-page.php');
 
 
 /* =Enable sticky post option for custom post types
 ------------------------------------------------------*/
-include(PLUGIN_MODULES . 'enable-sticky-cpt.php');
+//include(PLUGIN_MODULES . 'enable-sticky-cpt.php');
 
 
 /* =Adds custom post types to RSS
@@ -202,6 +215,10 @@ include(PLUGIN_MODULES . 'foundation-topbar.php');
 https://gist.github.com/davidpaulsson/3910181
 ------------------------------------------------------*/
 include(PLUGIN_MODULES . 'foundation-pagination.php');
+
+
+
+
 
 
 

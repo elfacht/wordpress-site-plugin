@@ -4,9 +4,9 @@
 ------------------------------------------------------*/
 function e8_widgets_init() {
 	register_sidebar(array(
-		'name'					=> 'Main Widget',
+		'name'					=> 'Footer Widgets',
 		'id'						=> 'sidebar-1',
-		'description'		=> 'Widget description goes hier',
+		'description'		=> 'Widgets for the footer',
 		'before_widget'	=> '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'	=> '</aside>',
 		'before_title'	=> '<h3 class="widget-title">',
