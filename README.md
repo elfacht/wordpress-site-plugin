@@ -24,6 +24,10 @@ License: CC-BY-SA https://creativecommons.org/licenses/by-sa/3.0/
 
 ### Changelog
 
+#### 2.0.1
+
+added content navigation and comments function
+
 #### 2.0
 
 functions are now modules for better handling and customizing

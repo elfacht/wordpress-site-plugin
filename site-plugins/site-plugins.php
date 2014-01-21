@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: Site Plugin for elfacht.com
-Description: Site specific functions for elfacht.com
+Plugin Name: Site Plugin for yoursite.com
+Description: Site specific functions for yoursite.com
 
 
 
